@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1 class="text-white text-center mt-2">Welcome to Todos!</h1>
+  <a href="{% url 'task_create' %}" class="btn btn-primary mb-5">Create a task</a>
+  
+  <div class="container row gap-3">
+    {% for task in tasks %}
+      <div class="card" style="width: 18rem;">
+        {% if task.image %}
+          <img src="{{ task.image.url }}" class="card-img-top" alt="Task Image" />
+        {% else %}
+          <img src="https://th.bing.com/th/id/OIP.0QedSqnoycimU9DhrQiOhgHaFk?cb=iwc2&rs=1&pid=ImgDetMain" class="card-img-top" alt="Default Image" />
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title">{{ task.user.username }}</h5>
+          <p class="card-text">{{ task.title }}</p>
+          {% comment %} {% if task.user == user %}
+            {% endcomment %}
+            <a href="{% url 'task_edit' task.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'task_delete' task.id %}" class="btn btn-success">Completed</a>
+            <a href="{% url 'task_detail' task.id %}" class="btn btn-info">View</a>
+
+            {% comment %}
+          {% endif %} {% endcomment %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

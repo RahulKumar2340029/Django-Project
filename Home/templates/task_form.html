@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1 class="text-white text-center mt-2">Welcome to Django Project!</h1>
+
+  <h2>
+    {% if form.instance.pk %}
+      Edit Task
+    {% else %}
+      Create Task
+    {% endif %}
+  </h2>
+
+  <form action="" method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-warning" type="submit">Submit</button>
+  </form>
+  <a href="{% url 'task_list' %}">Back to todo list</a>
+{% endblock %}
